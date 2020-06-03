@@ -27,9 +27,10 @@
     "microtime": "^2.1.6",
     "pace": "^0.0.4",
     "prop-types": "^15.0.0",
-    "react": "^15.4.2",
+    "react": "16.3.1",
     "react-emotion": "^8.0.5",
-    "react-test-renderer": "^15.4.2",
+    "react-test-renderer": "16.3.1",
+    "shakl": "0.0.11",
     "styled-components": "^2.1.2",
     "theming": "^1.1.0",
     "webpack": "^3.0.0"

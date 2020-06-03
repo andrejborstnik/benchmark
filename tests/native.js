@@ -1,79 +1,130 @@
-import React from 'react';
-import { View } from 'react-native'; // eslint-disable-line
-import { create as render } from 'react-test-renderer';
-import styled from 'styled-components/native';
-import { resetStyleCache } from 'styled-components/lib/models/InlineStyle';
+import React from 'react'
+import { View } from 'react-native' // eslint-disable-line
+import { create as render } from 'react-test-renderer'
+import styled from 'styled-components/native'
+import shakl from 'shakl/lib/rn'
+import { resetStyleCache } from 'styled-components/lib/models/InlineStyle'
 
 export default {
   'simple component': {
     styled: () => {
-      resetStyleCache();
+      resetStyleCache()
 
       const Component = styled(View)`
         color: red;
-      `;
+      `
 
-      render(<Component />);
+      render(<Component />)
+    },
+    shakl: () => {
+      const Component = shakl.View({ color: 'red' })
+
+      render(<Component />)
     },
   },
 
   'prop changes': {
     styled: () => {
-      resetStyleCache();
+      resetStyleCache()
 
       const Component = styled(View)`
-        color: ${props => (props.danger ? 'red' : 'black')};
-      `;
+        color: ${(props) => (props.danger ? 'red' : 'black')};
+      `
 
-      const instance = render(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
+      const instance = render(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+    },
+    shakl: () => {
+      const Component = shakl.View((props) => ({
+        color: props.danger ? 'red' : 'black',
+      }))
+
+      const instance = render(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
     },
   },
 
   'prop shorthands': {
     styled: () => {
-      resetStyleCache();
+      resetStyleCache()
 
       const Component = styled(View)`
         color: red;
         flex: 1;
-        font: bold 12px/14px "Helvetica";
+        font: bold 12px/14px 'Helvetica';
         margin: 1px 2px;
         padding: 3px 4px;
         border: 1px solid black;
-      `;
+      `
 
-      render(<Component />);
+      render(<Component />)
+    },
+    shakl: () => {
+      const Component = shakl.View({
+        color: 'red',
+        flex: 1,
+        font: "bold 12px/14px 'Helvetica'",
+        margin: '1px 2px',
+        padding: '3px 4px',
+        border: '1px solid black',
+      })
+
+      render(<Component />)
     },
   },
 
   'prop shorthands with prop changes': {
     styled: () => {
-      resetStyleCache();
+      resetStyleCache()
 
       const Component = styled(View)`
-        color: ${props => (props.danger ? 'red' : 'black')};
+        color: ${(props) => (props.danger ? 'red' : 'black')};
         flex: 1;
-        font: bold 12px/14px "Helvetica";
+        font: bold 12px/14px 'Helvetica';
         margin: 1px 2px;
         padding: 3px 4px;
         border: 1px solid black;
-      `;
+      `
 
-      const instance = render(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
-      instance.update(<Component />);
-      instance.update(<Component danger />);
+      const instance = render(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+    },
+    shakl: () => {
+      const Component = shakl.View((p) => ({
+        color: p.danger ? 'red' : 'black',
+        flex: 1,
+        font: 'bold 12px/14px "Helvetica"',
+        margin: '1px 2px',
+        padding: '3px 4px',
+        border: '1px solid black',
+      }))
+
+      const instance = render(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
+      instance.update(<Component />)
+      instance.update(<Component danger />)
     },
   },
-};
+}
